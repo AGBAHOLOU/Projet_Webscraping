@@ -11,4 +11,5 @@ class PriceComparatorItem(scrapy.Item):
     name = scrapy.Field()
     price = scrapy.Field()
     link = scrapy.Field()
+    site = scrapy.Field()
     pass
