@@ -1,15 +1,26 @@
-import scrapy
-from ..project.items import ProductItem
-class AmazonSpider(scrapy.Spider):
-    name = "amazon"    
-    start_urls = ["https://www.amazon.fr/s?k=%C3%A9lectrom%C3%A9nager&crid=2022MTZC24UWT&sprefix=%C3%A9lectrom%C3%A9%2Caps%2C573&ref=nb_sb_ss_ts-doa-p_1_9"]
-
-    def parse(self, response):
-        for product in response.css(".s-main-slot .s-result-item"):
-            item = ProductItem()            
-            item['name'] = product.css("h2 a span::text").get()
-            item['price'] = product.css(".a-price-whole::text").get()
-            item['link'] = response.urljoin(product.css("h2 a::attr(href)").get())
-            item['site'] = "Amazon"
-            yield item
+from flask import Flask, render_template
+import mysql.connector
  
+app = Flask(__name__)
+ 
+def get_data():
+    connection = mysql.connector.connect(
+        host='database,  # ou 'db' pour Docker
+        user='user',
+        password='password',
+        database='price_comparator'
+    )
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM products ORDER BY name, site")
+    results = cursor.fetchall()
+    cursor.close()
+    connection.close()
+    return results
+ 
+@app.route('/')
+def index():
+    products = get_data()
+    return render_template('index.html', products=products)
+ 
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5000)

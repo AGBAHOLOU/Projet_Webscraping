@@ -1,21 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Comparateur de prix</title>
-<link rel="stylesheet" href="/static/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparateur de Prix</title>
+<style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        img {
+            max-width: 100px;
+            height: auto;
+        }
+</style>
 </head>
 <body>
-<h1>Comparateur de prix</h1>
+<h1>Comparateur de Prix</h1>
 <table>
 <tr>
 <th>Nom</th>
 <th>Prix</th>
+<th>Image</th>
+<th>Site</th>
 <th>Lien</th>
 </tr>
         {% for product in products %}
 <tr>
 <td>{{ product.name }}</td>
 <td>{{ product.price }}</td>
+<td><img src="{{ product.image }}" alt="{{ product.name }}"></td>
+<td>{{ product.site }}</td>
 <td><a href="{{ product.link }}" target="_blank">Voir</a></td>
 </tr>
         {% endfor %}
