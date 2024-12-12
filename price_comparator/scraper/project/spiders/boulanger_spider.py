@@ -1,5 +1,5 @@
 import scrapy
-from ..items import ProductItem
+from ..project.items import ProductItem
 class BoulangerSpider(scrapy.Spider):
     name = "boulanger"    
     start_urls = ["https://www.boulanger.com/c/gros-electro-menager#tr=electromenager"]

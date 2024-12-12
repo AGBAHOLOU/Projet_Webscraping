@@ -1,5 +1,5 @@
 import scrapy
-from ..items import ProductItem
+from ..project.items import ProductItem
 class AmazonSpider(scrapy.Spider):
     name = "amazon"    
     start_urls = ["https://www.amazon.fr/s?k=%C3%A9lectrom%C3%A9nager&crid=2022MTZC24UWT&sprefix=%C3%A9lectrom%C3%A9%2Caps%2C573&ref=nb_sb_ss_ts-doa-p_1_9"]

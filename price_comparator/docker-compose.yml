@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  database:
+    build: ./database
+    ports:
+      - "3306:3306"
+ 
+  scraper:
+    image: python:3.9
+    working_dir: /app
+    volumes:
+      - ./scraper:/app
+    command: ["bash", "-c", "pip install scrapy && scrapy crawl amazon"]
+ 
+  webapp:
+    build: ./webapp
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database

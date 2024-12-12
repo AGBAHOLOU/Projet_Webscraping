@@ -1,5 +1,5 @@
 import scrapy
-from ..items import ProductItem
+from ..project.items import ProductItem
 class FnacSpider(scrapy.Spider):
     name = "fnac"    
     start_urls = ["https://www.fnac.com/Maison-Electromenager/shi181432/w-4#bl=Mmpem"]
